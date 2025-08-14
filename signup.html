@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signup - Khana Khajana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🍴 Khana Khajana</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html" class="active">Signup</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h1>Create Your Account</h1>
+    <form class="login-form" onsubmit="return validatePasswords()">
+  <input type="text" id="username" name="username" placeholder="Username" required />
+  <input type="email" id="email" name="email" placeholder="Email" required />
+  <input type="password" id="password" name="password" placeholder="Password" required />
+  <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required />
+  <button type="submit">Signup</button>
+  <p>Already have an account? <a href="login.html">Login here</a></p>
+</form>
+
+<script>
+function validatePasswords() {
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm_password").value;
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        alert("Password must be at least 8 characters long, contain at least one uppercase letter, and one number.");
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+    }
+
+    // Save signup details to localStorage
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userPassword", password);
+    localStorage.setItem("username", username);
+
+    alert("🎉 Signup successful! Welcome, " + username + "!");
+    return false; // prevent page reload
+}
+</script>
